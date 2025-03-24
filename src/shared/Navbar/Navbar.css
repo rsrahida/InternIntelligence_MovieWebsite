@@ -1,0 +1,60 @@
+.navbar {
+  background-color: #202020;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: sticky;
+  position: relative;
+  top: 0;
+  z-index: 1000;
+  padding: 7px;
+  height: 75px;
+}
+.movieImage {
+  width: 70px;
+  height: 70px;
+  margin-top: -8px;
+  position: absolute;
+  left: 40px;
+  top: 10px;
+}
+p {
+  color: #ff6347;
+  font-size: 35px;
+  font-weight: 800;
+  position: absolute;
+  left: 110px;
+}
+.navbar a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 10px 15px;
+  position: relative;
+  transition: color 0.3s ease;
+}
+.navbar a.active {
+  color: #ff6347;
+}
+.navbar a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background-color: #ff6347;
+  border-radius: 5px;
+  transition: width 0.3s ease;
+}
+.navbar a.active::after {
+  width: 100%;
+}
+.navbar a:hover {
+  color: #ff6347;
+}
+.navbar a:hover::after {
+  width: 100%;
+}
