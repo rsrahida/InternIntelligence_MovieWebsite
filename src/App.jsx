@@ -7,6 +7,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Navbar from "./shared/Navbar/Navbar";
 import Footer from "./shared/Footer/Footer";
+import Watchlist from "./pages/Watchlist";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
           <Route path="/blog" element=<Blog /> />
           <Route path="/about" element=<About /> />
           <Route path="/contact" element=<Contact /> />
+          <Route path="/watchlist" element=<Watchlist /> />
         </Routes>
         <Footer />
       </BrowserRouter>

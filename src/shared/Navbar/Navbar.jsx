@@ -37,6 +37,12 @@ const Navbar = () => {
       >
         Contact
       </Link>
+      <Link
+        to="/watchlist"
+        className={location.pathname === "/watchlist" ? "active" : ""}
+      >
+        WatchList
+      </Link>
     </div>
   );
 };
