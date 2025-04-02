@@ -20,12 +20,6 @@ const Navbar = () => {
         Trending
       </Link>
       <Link
-        to="/blog"
-        className={location.pathname === "/blog" ? "active" : ""}
-      >
-        Blog
-      </Link>
-      <Link
         to="/about"
         className={location.pathname === "/about" ? "active" : ""}
       >
