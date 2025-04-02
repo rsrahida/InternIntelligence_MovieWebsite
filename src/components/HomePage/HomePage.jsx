@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { message } from "antd";  // Ant Design'den message bileşenini import ediyoruz
+import { message, Modal } from "antd";
 import "./HomePage.css";
 import image from "../../assets/images/background.png";
 
@@ -11,6 +11,8 @@ const HomePage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
 
   useEffect(() => {
     fetch(API_URL)
@@ -38,18 +40,15 @@ const HomePage = () => {
   }, [searchTerm, movies]);
 
   const handleAddToWatchlist = (movie) => {
-    // LocalStorage'dan mevcut watchlist'i alıyoruz
     const storedMovies = JSON.parse(localStorage.getItem("watchlist")) || [];
-
-    // Yeni filmi başa ekliyoruz
-    storedMovies.unshift(movie); // `unshift` ile en başa ekliyoruz
-
-    // Güncellenmiş watchlist'i localStorage'a kaydediyoruz
+    storedMovies.unshift(movie);
     localStorage.setItem("watchlist", JSON.stringify(storedMovies));
-    console.log(`${movie.title} added to watchlist`);
-
-    // Ant Design Message: "Film başarıyla watchlist'e eklendi"
     message.success(`${movie.title} has been added to your watchlist!`);
+
+    setModalMessage(
+      `${movie.title} has been successfully added to your watchlist!`
+    );
+    setIsModalVisible(true);
   };
 
   return (
@@ -66,7 +65,6 @@ const HomePage = () => {
         </div>
       </div>
       <h1 className="homepage-title">Popular Movies</h1>
-
       <input
         type="text"
         placeholder="Search for a movie..."
@@ -74,13 +72,12 @@ const HomePage = () => {
         onChange={handleSearch}
         className="search-input"
       />
-
       <div className="movies-list">
         {filteredMovies.map((movie) => (
           <div
             key={movie.id}
             className="movie-card"
-            onClick={() => setSelectedMovie(movie)} // Only show popup on card click
+            onClick={() => setSelectedMovie(movie)}
           >
             <img
               src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
@@ -91,7 +88,6 @@ const HomePage = () => {
           </div>
         ))}
       </div>
-
       {selectedMovie && (
         <div className="popup-overlay">
           <div className="popup">
@@ -110,15 +106,33 @@ const HomePage = () => {
                 >
                   Add to Watchlist
                 </button>
-                <button className="exit" onClick={() => setSelectedMovie(null)}>X</button>
+                <button className="exit" onClick={() => setSelectedMovie(null)}>
+                  X
+                </button>
               </div>
             </div>
           </div>
         </div>
       )}
+      <Modal
+        title="Watchlist"
+        visible={isModalVisible}
+        onOk={() => setIsModalVisible(false)}
+        className="custom-modal"
+        footer={null}
+      >
+        <p className="modal-message">{modalMessage}</p>
+        <div className="modal-footer">
+          <button
+            className="modal-ok-btn"
+            onClick={() => setIsModalVisible(false)}
+          >
+            OK
+          </button>
+        </div>
+      </Modal>
     </div>
   );
 };
 
 export default HomePage;
-
