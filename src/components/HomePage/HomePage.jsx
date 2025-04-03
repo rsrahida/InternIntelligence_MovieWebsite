@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { message, Modal } from "antd";
 import "./HomePage.css";
 import image from "../../assets/images/background.png";
 
@@ -11,8 +10,8 @@ const HomePage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [modalMessage, setModalMessage] = useState("");
+  const [watchlistMessage, setWatchlistMessage] = useState("");
+  const [isMessageVisible, setIsMessageVisible] = useState(false);
 
   useEffect(() => {
     fetch(API_URL)
@@ -41,14 +40,25 @@ const HomePage = () => {
 
   const handleAddToWatchlist = (movie) => {
     const storedMovies = JSON.parse(localStorage.getItem("watchlist")) || [];
-    storedMovies.unshift(movie);
-    localStorage.setItem("watchlist", JSON.stringify(storedMovies));
-    message.success(`${movie.title} has been added to your watchlist!`);
 
-    setModalMessage(
-      `${movie.title} has been successfully added to your watchlist!`
+    const isMovieInWatchlist = storedMovies.some(
+      (storedMovie) => storedMovie.id === movie.id
     );
-    setIsModalVisible(true);
+
+    if (isMovieInWatchlist) {
+      setWatchlistMessage(`${movie.title} is already in your watchlist!`);
+    } else {
+      storedMovies.unshift(movie);
+      localStorage.setItem("watchlist", JSON.stringify(storedMovies));
+      setWatchlistMessage(
+        `${movie.title} has been successfully added to your watchlist!`
+      );
+    }
+
+    setIsMessageVisible(true);
+    setTimeout(() => {
+      setIsMessageVisible(false);
+    }, 2000);
   };
 
   return (
@@ -114,23 +124,11 @@ const HomePage = () => {
           </div>
         </div>
       )}
-      <Modal
-        title="Watchlist"
-        visible={isModalVisible}
-        onOk={() => setIsModalVisible(false)}
-        className="custom-modal"
-        footer={null}
-      >
-        <p className="modal-message">{modalMessage}</p>
-        <div className="modal-footer">
-          <button
-            className="modal-ok-btn"
-            onClick={() => setIsModalVisible(false)}
-          >
-            OK
-          </button>
+      {isMessageVisible && (
+        <div className="watchlist-message-popup">
+          <p className="texts">{watchlistMessage}</p>
         </div>
-      </Modal>
+      )}
     </div>
   );
 };

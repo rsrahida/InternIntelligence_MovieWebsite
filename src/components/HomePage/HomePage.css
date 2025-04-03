@@ -249,51 +249,53 @@
   color: white;
 }
 
-.custom-modal .ant-modal-content {
-  width: 550px;
-  height: 250px;
-  background: #090909;
-  border-radius: 15px;
-  padding: 30px;
-  margin-top: 60px;
-  text-align: center;
-  position: relative;
-}
-
-.custom-modal .ant-modal-title {
-  color: #ff7f00;
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 20px;
-}
-
-.custom-modal .modal-message {
-  color: #e0e0e0;
+.watchlist-message-popup {
+  width: 500px;
+  height: 100px;
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgb(74, 74, 74);
+  color: rgb(15, 0, 0);
+  padding: 20px;
+  border-radius: 10px;
+  z-index: 999999999;
   font-size: 18px;
-  margin-bottom: 40px;
-  margin-left: -40px;
-  width: 400px;
+  box-shadow: 0 4px 6px rgba(237, 59, 19, 0.956);
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
 }
 
-.modal-footer {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 20px;
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.texts {
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+  color: rgba(255, 106, 52, 0.8);
+  margin-left: -110px;
+  padding-top: 10px;
 }
 
-.modal-ok-btn {
-  padding: 10px 20px;
-  background-color: #ff7f00;
-  color: #fff;
-  font-size: 16px;
+.watchlist-message-popup .exit {
+  background-color: rgba(255, 69, 0, 0.8);
+  color: white;
   font-weight: bold;
   border: none;
+  padding: 10px;
   border-radius: 5px;
   cursor: pointer;
+  margin-top: 10px;
   transition: background-color 0.3s ease;
-  margin-top: 100px;
 }
 
-.modal-ok-btn:hover {
-  background-color: #ff4500;
+.watchlist-message-popup .exit:hover {
+  background-color: rgb(107, 29, 0);
 }

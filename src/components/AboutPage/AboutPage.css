@@ -1,0 +1,47 @@
+.image-containerr {
+  position: relative;
+  width: 100%;
+  height: 120vh;
+}
+
+.imagee {
+  width: 100%;
+  height: 120vh;
+  object-fit: cover;
+}
+
+.overlayy {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #1a2127cc;
+  z-index: 1;
+}
+
+.textt {
+  width: 900px;
+  text-align: center;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-60%, -480%);
+  color: white;
+  font-size: 2rem;
+  z-index: 2;
+}
+
+.text-titlee {
+  font-size: 3rem;
+  font-weight: bold;
+  padding-left: 160px;
+  color: #ff6347;
+}
+
+.text-descriptionn {
+  width: 900px;
+  margin-top: 40px;
+  font-size: 18px;
+  color: blanchedalmond;
+}
