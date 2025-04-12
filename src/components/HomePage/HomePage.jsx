@@ -3,7 +3,7 @@ import "./HomePage.css";
 import image from "../../assets/images/background.png";
 
 const API_KEY = "e4abc06ace07e674d8d22443d115d4d3";
-const API_URL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
+const API_URL = `https://api.themoviedb.org/3/movie/popular?api_key=e4abc06ace07e674d8d22443d115d4d3&language=en-US&page=1`;
 
 const HomePage = () => {
   const [movies, setMovies] = useState([]);
